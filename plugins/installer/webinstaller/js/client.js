@@ -106,14 +106,14 @@ Joomla.loadweb = function(url) {
 
 Joomla.webpaginate = function(url, target) {
 	jQuery('#web-paginate-loader').show();
-	
+
 	jQuery.get(url, function(response) {
 		jQuery('#web-paginate-loader').hide();
 		jQuery('#'+target).html(response.data.html);
-	}, 'jsonp').fail(function() { 
+	}, 'jsonp').fail(function() {
 		jQuery('#web-paginate-loader').hide();
 		//jQuery('#web-paginate-error').hide();
-	});	
+	});
 }
 
 Joomla.installfromwebexternal = function(redirect_url) {
@@ -161,7 +161,7 @@ Joomla.installfromwebajaxsubmit = function() {
 	if (Joomla.apps.id) {
 		tail += '&id='+Joomla.apps.id;
 	}
-	
+
 	if (jQuery('#com-apps-searchbox').val()) {
 		var value = encodeURI(jQuery('#com-apps-searchbox').val().toLowerCase().replace(/ +/g,'_').replace(/[^a-z0-9-_]/g,'').trim());
 		tail += '&filter_search='+value;
@@ -214,7 +214,7 @@ Joomla.apps.initialize = function() {
 			.css("left", jQuery('#myTabContent').position().left - jQuery(window).scrollLeft())
 			.css("width", jQuery('#myTabContent').width())
 			.css("height", jQuery('#myTabContent').height())
-			.appendTo('#myTabContent');
+			.appendTo('#myTabContent #web');
 		jQuery('#appsloading').ajaxStart(function() {
 			jQuery('body').addClass('ifw-busy');
 			jQuery(this).show();
@@ -225,15 +225,15 @@ Joomla.apps.initialize = function() {
 	}
 
 	Joomla.loadweb(apps_base_url+'index.php?format=json&option=com_apps&view=dashboard');
-	
+
 	Joomla.apps.clickforlinks();
-	
+
 	jQuery('#com-apps-searchbox').live('keypress', function(event){
 		if(event.which == 13) {
 			Joomla.apps.initiateSearch();
 		}
 	});
-	
+
 	jQuery('#search-reset').live('click', function(event){
 		jQuery('#com-apps-searchbox').val('');
 		Joomla.apps.initiateSearch();
@@ -243,7 +243,7 @@ Joomla.apps.initialize = function() {
 		Joomla.apps.ordering = jQuery(this).prop("selectedIndex");
 		Joomla.installfromwebajaxsubmit();
 	});
-	
+
 	if (apps_installfrom_url != '') {
 		Joomla.installfromweb(apps_installfrom_url);
 	}
@@ -274,7 +274,7 @@ Joomla.apps.clicker = function() {
 Joomla.submitbutton5 = function(pressbutton)
 {
 	var form = document.getElementById('adminForm');
-	
+
 	// do field validation
 	if (form.install_url.value != "" && form.install_url.value != "http://")
 	{
